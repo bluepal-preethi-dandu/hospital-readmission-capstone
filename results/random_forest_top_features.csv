@@ -1,0 +1,16 @@
+,0
+num__number_inpatient,0.11273382393518654
+num__total_visits_prior,0.1105146162571566
+cat__discharge_disposition_id_1,0.07714244569822093
+num__time_in_hospital,0.04744537365186113
+cat__medical_specialty_Unknown,0.04720280172205907
+num__age_ordinal,0.038826943739547176
+cat__payer_code_MC,0.03700077665935991
+num__num_procedures,0.032688001795220606
+cat__payer_code_Unknown,0.03080552042215293
+cat__discharge_disposition_id_3,0.0298923661377822
+cat__race_Caucasian,0.028555803978263142
+cat__discharge_disposition_id_6,0.02254987985172133
+cat__gender_Female,0.02082654795041123
+cat__discharge_disposition_id_22,0.020797028494401217
+num__number_diagnoses,0.02047223449094396

@@ -1,0 +1,16 @@
+,0
+cat__gender_Male,0.09489253
+cat__medical_specialty_Unknown,0.08730695
+cat__discharge_disposition_id_1,0.06715688
+num__number_inpatient,0.046220705
+cat__metformin_No,0.043312065
+cat__race_Caucasian,0.043171972
+cat__payer_code_Unknown,0.04085928
+num__age_ordinal,0.037905693
+num__num_procedures,0.033474475
+cat__payer_code_MC,0.03152221
+cat__medical_specialty_InternalMedicine,0.029812558
+num__time_in_hospital,0.027296728
+cat__admission_source_id_7,0.024595413
+cat__insulin_Down,0.0227556
+cat__insulin_Steady,0.020905823

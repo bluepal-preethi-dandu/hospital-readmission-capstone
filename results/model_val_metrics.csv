@@ -1,0 +1,5 @@
+model,split,accuracy,precision,recall,f1,roc_auc,pr_auc
+logistic_regression,val,0.6559,0.1817,0.5758,0.2762,0.6689,0.226
+random_forest,val,0.8296,0.2301,0.211,0.2201,0.6584,0.1968
+decision_tree,val,0.8564,0.3008,0.1958,0.2372,0.6488,0.1945
+xgboost,val,0.8861,0.5057,0.0256,0.0488,0.6839,0.2477

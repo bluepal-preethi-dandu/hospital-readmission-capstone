@@ -1,0 +1,5 @@
+tier,probability_range,support,observed_readmission_rate,intervention
+Low Risk,"[0.00, 0.12)",8786,0.06874573184611883,"Standard discharge instructions and routine primary-care follow-up; consistent with Project BOOST risk stratification, no additional intensive transition service is assigned when observed risk is low."
+Moderate Risk,"[0.12, 0.20)",4367,0.1396839935882757,Place a post-discharge follow-up call within 72 hours and complete a medication-reconciliation review; this is a focused Project BOOST-style transition support step.
+High Risk,"[0.20, 0.35)",1584,0.22853535353535354,"Use Project BOOST-style structured discharge planning: teach-back education, a follow-up appointment scheduled before discharge, and a phone call within 48 hours."
+Very High Risk,"[0.35, 1.00]",260,0.4153846153846154,"Use the full Care Transitions Intervention (CTI): assign a transition coach, arrange a home visit within 72 hours, reconcile medications, teach red-flag symptoms, and conduct 30-day check-in calls."

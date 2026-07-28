@@ -1,0 +1,12 @@
+# Python environments and bytecode
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Raw encounter-level data: keep it out of source control.
+data/raw/diabetic_data.csv
+diabetes+130-us+hospitals+for+years+1999-2008/diabetic_data.csv
+
+# Local Streamlit configuration and secrets
+.streamlit/secrets.toml

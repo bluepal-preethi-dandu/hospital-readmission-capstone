@@ -1,0 +1,11 @@
+feature,mean_abs_shap
+num__number_inpatient,0.34783262
+num__time_in_hospital,0.25123987
+num__age_ordinal,0.22470061
+num__num_procedures,0.19259027
+cat__discharge_disposition_id_1,0.1348736
+cat__medical_specialty_Unknown,0.110636115
+num__number_diagnoses,0.10104778
+num__diag_3_freq,0.090014115
+cat__payer_code_Unknown,0.070798494
+cat__race_Caucasian,0.05872255
