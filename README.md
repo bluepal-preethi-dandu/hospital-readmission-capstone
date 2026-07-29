@@ -75,9 +75,7 @@ streamlit run app/demo_app.py
 
 ## Live demo
 
-**Streamlit Community Cloud URL:** `https://<your-streamlit-subdomain>.streamlit.app`
-
-Replace the placeholder above with the deployed app URL after the Streamlit Community Cloud deployment is live.
+**Streamlit Community Cloud URL:** https://hospital-readmission-capstone-aa44rabxhs6wftu3fn5sdy.streamlit.app
 
 ## Final model summary
 
