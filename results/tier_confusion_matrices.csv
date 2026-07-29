@@ -1,0 +1,4 @@
+threshold,escalation_rule,true_negatives,false_positives,false_negatives,true_positives,precision,recall
+0.12,Moderate Risk or higher escalation,8182,5131,604,1080,0.17388504266623733,0.6413301662707839
+0.2,High Risk or higher escalation,11939,1374,1214,470,0.25488069414316705,0.27909738717339666
+0.35,Very High Risk escalation,13161,152,1576,108,0.4153846153846154,0.06413301662707839
