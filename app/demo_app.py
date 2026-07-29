@@ -160,6 +160,22 @@ def main() -> None:
     st.title("30-Day Hospital Readmission Risk")
     st.warning("This is a decision-support prototype for a capstone project, not a validated clinical tool. It does not replace clinical judgment.")
 
+    with st.expander("About this app"):
+        st.markdown(
+            """
+            This app estimates a patient's likelihood of **30-day hospital readmission** after discharge.
+            It is powered by an **XGBoost** model trained on the **UCI Diabetes 130-US Hospitals** dataset.
+
+            The result includes a predicted probability, one of four risk tiers (**Low**, **Moderate**,
+            **High**, or **Very High**), and a recommended transition-of-care intervention. Use the output
+            as a decision-support signal alongside clinical context and judgment—not as an automated decision
+            or a validated clinical tool.
+
+            Full project documentation is available in the
+            [GitHub repository](https://github.com/bluepal-preethi-dandu/hospital-readmission-capstone).
+            """
+        )
+
     preprocessor, model_pipeline = load_artifacts()
     reference = load_training_reference()
     dominant = reference["medication_dominant_values"]
