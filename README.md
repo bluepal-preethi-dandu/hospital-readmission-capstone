@@ -1,77 +1,99 @@
-# Hospital Readmission Prediction Project
+# Hospital Readmission Prediction
 
-## Project Overview
-This project focuses on building an AI/ML-based healthcare system to predict whether a patient will be readmitted to the hospital within 30 days of discharge. The work is based on the capstone assignment for an end-to-end machine learning solution in the healthcare domain.
+This capstone project predicts whether a patient with diabetes will be readmitted within 30 days of discharge. It develops an end-to-end machine-learning workflow that starts with exploratory analysis and patient-safe preprocessing, then evaluates models, explains predictions with SHAP, audits subgroup performance, maps risk to care-transition interventions, and documents a production deployment architecture.
 
-## Problem Statement
-Hospital readmissions create major financial and clinical burdens. The objective is to design a predictive system that:
-- estimates 30-day readmission risk,
-- identifies the most important clinical predictors,
-- supports personalized intervention recommendations,
-- evaluates fairness and ethical concerns,
-- proposes a production-ready deployment architecture.
+The project uses the [UCI Diabetes 130-US Hospitals dataset](https://archive.ics.uci.edu/dataset/296/diabetes+130-us+hospitals+for+years+1999-2008), which contains 101,766 inpatient encounters from 130 U.S. hospitals between 1999 and 2008. Predicting readmission risk matters because preventable readmissions are disruptive for patients and can trigger financial penalties under the Hospital Readmissions Reduction Program. The goal is not to automate care decisions: it is to give clinicians a transparent decision-support signal that can guide post-discharge follow-up.
 
-## Dataset
-The project uses the UCI Diabetes 130-US Hospitals dataset, which contains approximately 100,000 patient encounters from 130 U.S. hospitals over the period 1999–2008.
+## Project highlights
 
-### Files available in this folder
-- capstone_assignment-Hospital readmission.docx: original assignment document
-- diabetes+130-us+hospitals+for+years+1999-2008/diabetic_data.csv: main dataset
-- diabetes+130-us+hospitals+for+years+1999-2008/IDS_mapping.csv: dataset code mapping file
+- Patient-grouped 70/15/15 train, validation, and test split with zero patient overlap.
+- Expired encounters (`discharge_disposition_id` 11, 19, 20, and 21) removed before modeling to avoid a non-clinical data artifact.
+- SMOTE applied inside cross-validation folds through an `imblearn` pipeline, preventing synthetic-neighbor leakage.
+- SHAP explanations, subgroup fairness analysis, and a threshold-calibration mitigation experiment.
+- A Streamlit decision-support prototype that returns probability, risk tier, and a recommended intervention.
 
-## Expected Project Workflow
-1. Data loading and inspection
-2. Exploratory data analysis (EDA)
-3. Data preprocessing and feature engineering
-4. Handling class imbalance
-5. Model training and comparison
-   - Logistic Regression
-   - Random Forest or Gradient Boosting
-   - A third model of choice
-6. Evaluation using recall, F1-score, ROC-AUC, and confusion matrix
-7. Feature importance analysis using SHAP or equivalent methods
-8. Fairness and bias evaluation
-9. Intervention design and deployment architecture proposal
+## Repository structure
 
-## Suggested Technical Stack
-- Python
-- pandas
-- numpy
-- scikit-learn
-- matplotlib
-- seaborn
-- imbalanced-learn
-- shap
-- xgboost (optional)
-
-## Suggested Project Structure
 ```text
 capstone/
-├── README.md
-├── capstone_assignment-Hospital readmission.docx
-├── diabetes+130-us+hospitals+for+years+1999-2008/
-│   ├── diabetic_data.csv
-│   └── IDS_mapping.csv
-├── notebooks/            # Jupyter notebooks
-├── src/                  # Python modules
-├── results/              # figures, metrics, model files
-└── requirements.txt
+├── notebooks/       # EDA, preprocessing, SHAP, fairness, and intervention notebooks
+├── scripts/         # Reusable training and threshold-analysis scripts
+├── app/             # Streamlit demo application and its deployment requirements
+├── results/         # Saved model artifacts, metrics, figures, and CSV outputs
+├── docs/            # Deployment architecture proposal
+├── report/          # Technical report and presentation deliverables
+├── requirements.txt # Pinned project dependencies
+└── README.md
 ```
 
-## Deliverables to Prepare
-- Jupyter notebook or Python scripts for modeling
-- README with setup and execution instructions
-- requirements.txt with dependencies
-- results folder with charts and metrics
-- technical report in IEEE/ACM style
+## Setup
 
-## Setup Instructions
-1. Create a Python environment.
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Open the dataset and begin preprocessing and modeling.
+Clone the repository and create an isolated Python environment.
 
-## Notes
-This folder already contains the assignment brief and the dataset needed for the project. The next step is to turn the assignment into a working implementation notebook or Python pipeline.
+```bash
+git clone https://github.com/bluepal-preethi-dandu/hospital-readmission-capstone.git
+cd hospital-readmission-capstone
+
+python -m venv .venv
+```
+
+Activate the environment.
+
+```bash
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+
+# macOS/Linux
+source .venv/bin/activate
+```
+
+Install the pinned dependencies.
+
+```bash
+pip install -r requirements.txt
+```
+
+The raw UCI data file is intentionally excluded from version control. Place `diabetic_data.csv` in `diabetes+130-us+hospitals+for+years+1999-2008/` before rerunning the data-preparation workflow.
+
+## Execution guide
+
+Run the workflow in the following order:
+
+1. `notebooks/01_data_exploration.ipynb` — data quality audit, class balance, and exploratory analysis.
+2. `notebooks/02_preprocessing.ipynb` — filtering, feature engineering, and patient-grouped splits; writes processed data.
+3. `python scripts/train_pipeline.py` — trains and evaluates Logistic Regression, Random Forest, Decision Tree, and XGBoost; writes model artifacts and metrics.
+4. `python scripts/threshold_analysis.py` — compares models at a matched recall target and selects operating thresholds.
+5. `notebooks/04_interpretability.ipynb` — SHAP summary and patient-level waterfall explanations.
+6. `notebooks/05_fairness_analysis.ipynb` — subgroup metrics, ethics discussion, and threshold-calibration mitigation experiment.
+7. `notebooks/06_intervention_logic.ipynb` — data-driven risk tiers and intervention design.
+
+Run the local demo from the repository root:
+
+```bash
+streamlit run app/demo_app.py
+```
+
+## Live demo
+
+**Streamlit Community Cloud URL:** `https://<your-streamlit-subdomain>.streamlit.app`
+
+Replace the placeholder above with the deployed app URL after the Streamlit Community Cloud deployment is live.
+
+## Final model summary
+
+The selected final model is **XGBoost**. It achieved the best validation ROC-AUC among the evaluated models: **0.6839**. Its default 0.50 decision threshold produced very low recall, so the deployment cutoff was set to **0.12** to prioritize catching true readmissions.
+
+At the selected validation operating point, XGBoost achieved:
+
+| Metric | Value |
+| --- | ---: |
+| Threshold | 0.12 |
+| Precision | 0.1777 |
+| Recall | 0.6369 |
+| ROC-AUC | 0.6839 |
+
+The resulting probability is translated into four operational tiers: Low, Moderate, High, and Very High risk. The Streamlit prototype presents the tier and a corresponding transition-of-care intervention, while keeping clinician judgment and override authority central to the workflow.
+
+## Important note
+
+This project is an educational capstone and a decision-support prototype. It is not a validated clinical tool and must not be used as an automated treatment, discharge, or eligibility decision.
